@@ -3,7 +3,7 @@ pipeline {
     
     environment {
         
-        DOCKER_REGISTRY = 'https://github.com/AnkitChauhan10/springboot'
+        DOCKER_REGISTRY = 'https://github.com/AnkitChauhan10'
     }
     
     stages {
