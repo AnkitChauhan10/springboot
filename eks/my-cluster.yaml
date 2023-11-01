@@ -1,0 +1,14 @@
+apiVersion: eksctl.io/v1alpha5
+kind: ClusterConfig
+
+metadata:
+  name: nbodev-eks-test-cluster
+  region: ap-southeast-1
+
+managedNodeGroups:
+  - name: my-nodes
+    labels: { role: workers }
+    instanceType: t4g.large
+    desiredCapacity: 1
+    volumeSize: 80
+    privateNetworking: true

@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+	<parent>
+		<groupId>org.springframework.boot</groupId>
+		<artifactId>spring-boot-starter-parent</artifactId>
+		<version>2.7.0</version>
+		<relativePath /> <!-- lookup parent from repository -->
+	</parent>
+	<groupId>com.nbodev</groupId>
+	<artifactId>springboot-dockerized</artifactId>
+	<version>0.0.1-SNAPSHOT</version>
+	<name>springboot-dockerized</name>
+	<description>Spring Boot Dockerized</description>
+	<properties>
+		<java.version>11</java.version>
+		<my.docker.registry>registry.hub.docker.com/nbodev</my.docker.registry>
+		<start-class>com.nbodev.demo.DemoApplication</start-class>
+	</properties>
+	<dependencies>
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-actuator</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-web</artifactId>
+		</dependency>
+
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-test</artifactId>
+			<scope>test</scope>
+		</dependency>
+	</dependencies>
+
+	<build>
+		<plugins>
+			<plugin>
+				<groupId>org.springframework.boot</groupId>
+				<artifactId>spring-boot-maven-plugin</artifactId>
+			</plugin>
+		</plugins>
+	</build>
+
+
+	<profiles>
+		<profile>
+			<id>docker</id>
+			<build>
+				<plugins>
+					<plugin>
+						<groupId>com.google.cloud.tools</groupId>
+						<artifactId>jib-maven-plugin</artifactId>
+						<version>3.2.1</version>
+						<executions>
+							<execution>
+								<phase>package</phase>
+								<goals>
+									<goal>build</goal>
+								</goals>
+							</execution>
+						</executions>
+						<configuration>
+							<container>
+								<!-- default container entrypoint -->
+								<mainClass>${start-class}</mainClass>
+								<format>Docker</format>
+								<!-- without this the image will look like it has been created a few years ago -->
+								<creationTime>USE_CURRENT_TIMESTAMP</creationTime>
+							</container>
+							<from>
+								<image>gcr.io/distroless/java:11</image>
+							</from>
+							<to>
+								<image>${my.docker.registry}/${project.artifactId}</image>
+								<tags>
+									<tag>latest</tag>
+								</tags>
+							</to>
+						</configuration>
+					</plugin>
+				</plugins>
+			</build>
+		</profile>
+	</profiles>
+
+</project>
