@@ -11,7 +11,7 @@ pipeline {
             steps {
                 script {
                     
-                    docker.build("${DOCKER_REGISTRY}/springboot:latest")
+                    docker.build("ankitchauhan18/springboot:latest")
                 }
             }
         }
@@ -21,7 +21,7 @@ pipeline {
                 script {
                    
                     docker.withRegistry("${DOCKER_REGISTRY}", 'your-docker-credentials') {
-                        docker.image("${DOCKER_REGISTRY}/springboot:lts").push()
+                        docker.image("ankitchauhan18/springboot:latest").push()
                     }
                 }
             }
@@ -49,7 +49,7 @@ pipeline {
     post {
         always {
             // Clean up Docker images
-            sh "docker rmi -f ${DOCKER_REGISTRY}/springboot:latest"
+            sh "docker rmi -f ankitchauhan18/springboot:latest"
         }
     }
 }
