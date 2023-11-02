@@ -11,7 +11,7 @@ pipeline {
             steps {
                 script {
                     
-                    docker.build("${DOCKER_REGISTRY}/springboot:lts")
+                    docker.build("${DOCKER_REGISTRY}/springboot:latest")
                 }
             }
         }
@@ -49,7 +49,7 @@ pipeline {
     post {
         always {
             // Clean up Docker images
-            sh "docker rmi -f ${DOCKER_REGISTRY}/springboot:lts"
+            sh "docker rmi -f ${DOCKER_REGISTRY}/springboot:latest"
         }
     }
 }
