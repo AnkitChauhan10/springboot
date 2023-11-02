@@ -3,7 +3,7 @@ pipeline {
     
     environment {
         
-        DOCKER_REGISTRY = 'https://hub.docker.com/u/ankitchauhan18'
+        DOCKER_REGISTRY = 'ankitchauhan18'
     }
     
     stages {
